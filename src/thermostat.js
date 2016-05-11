@@ -10,3 +10,15 @@ Thermostat.prototype.value = function() {
 Thermostat.prototype.increase = function(amount) {
   this.temperature += amount
 }
+
+Thermostat.prototype.decrease = function(amount) {
+  if(this.belowMinimum(amount)) {
+    throw new Error("Minimum temperature is 10")
+  } else {
+    this.temperature -= amount
+  }
+}
+
+Thermostat.prototype.belowMinimum = function(amount) {
+  return ((this.temperature - amount) < 10)
+}
