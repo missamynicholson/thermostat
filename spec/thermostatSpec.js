@@ -27,4 +27,20 @@ describe("Feature test:", function() {
         expect(function() {thermostat.decrease(1)}).toThrowError("Minimum temperature is 10")
       });
     });
+
+    describe("power saving mode on", function() {
+      it("throws an error when temperature goes above 25 degrees", function() {
+          thermostat.togglePowerSave(true)
+          thermostat.increase(5)
+          expect(function() {thermostat.increase(1)}).toThrowError("Max temp is 25")
+      });
+    });
+
+    describe("power saving mode onff", function() {
+      it("throws an error when temperature goes above 32 degrees", function() {
+          thermostat.togglePowerSave(false)
+          thermostat.increase(12)
+          expect(function() {thermostat.increase(1)}).toThrowError("Max temp is 32")
+      });
+    });
 });
