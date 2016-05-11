@@ -1,7 +1,7 @@
 function Thermostat () {
   this.STARTING_VALUE = 20
   this.temperature = this.STARTING_VALUE
-  this.maximumTemperature = 32
+  this.maximumTemperature = 25
 }
 
 Thermostat.prototype.value = function() {
@@ -39,4 +39,8 @@ Thermostat.prototype.togglePowerSave = function(status) {
 
 Thermostat.prototype.aboveMaximum = function(amount) {
   return ((this.temperature + amount) > this.maxTemp())
+}
+
+Thermostat.prototype.reset = function() {
+  return this.temperature = 20
 }

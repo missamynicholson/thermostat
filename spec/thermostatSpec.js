@@ -29,6 +29,10 @@ describe("Feature test:", function() {
     });
 
     describe("power saving mode on", function() {
+      it("is on by default", function() {
+        expect(thermostat.maxTemp()).toEqual(25)
+      });
+
       it("throws an error when temperature goes above 25 degrees", function() {
           thermostat.togglePowerSave(true)
           thermostat.increase(5)
@@ -42,5 +46,12 @@ describe("Feature test:", function() {
           thermostat.increase(12)
           expect(function() {thermostat.increase(1)}).toThrowError("Max temp is 32")
       });
+    });
+
+    describe("reset button", function() {
+      it("resets temperature to 20", function() {
+        thermostat.reset()
+        expect(thermostat.value()).toEqual(20)
+      })
     });
 });
