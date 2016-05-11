@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>Thermostat</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 </head>
 
 <body>
-  <p>Temperature:<span id="temperature"></span></p>
-  <p>Power mode status:<p id="powerModeStatus"/></p>
-  <p>Temperature Outside:<p id="weatherTemp"/></p>
-  <div>
-  <h4>City selection</h4>
-  <form>
-  <select name="cities" onChange="getWeather(this.value);">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <p style="color:white">Temperature Outside:<p><span id="weatherTemp"></span>&#x2103</p></p>
+      </div>
+      <div class="col-md-6">
+        <p style="color:white">Power mode:</p><br>
+        <i id="powerSaveSwitch" class="material-icons">power</i>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+  <div align="center">
+  <form >
+  <select style="width:50%" class="form-control" name="cities" onChange="getWeather(this.value);">
     <option value="2643743">London</option>
     <option value="2673730">Stockholm</option>
     <option value="7839805">Melbourne</option>
@@ -19,16 +33,17 @@
     <option value="4736134">Texas City</option>
   </select>
   </form><br>
+</div>
   </div>
 
-  <button id="increase">Increase Temperature</button>
-  <br>
-  <button id="decrease">Decrease Temperature</button>
-  <br>
-  <button id="reset">Reset Temperature</button>
-  <br>
-  <button id="powerSaveSwitch">Power Save Switch</button>
 
+  <i id="increase" class="material-icons" style="font-size:70px; color:#FFFFFF">keyboard_arrow_up</i>
+  <br>
+  <p><span id="temperature" style="font-size:100px; color:#FFFFFF"></span><i id="reset" class="material-icons vcenter" style="font-size:40px; color:#FFFFFF">refresh</i></p>
+  <br>
+  <i id="decrease" class="material-icons" style="font-size:70px; color:#FFFFFF">keyboard_arrow_down</i>
+
+  <br>
 
   <script src="src/thermostat.js"></script>
   <script src="jquery.js"></script>

@@ -63,9 +63,9 @@ Thermostat.prototype.reset = function() {
 
 Thermostat.prototype.displayColour = function() {
   if(this.value() < this.lowUsage)
-    return "green"
+    return "#79d279"
   else if (this.value() < this.midUsage)
-    return "yellow"
+    return "#ffd480"
   else
-  return "red"
+  return "#ff5c33"
 }

@@ -41,12 +41,12 @@ $( document ).ready(function() {
   }
 
   function updatePowerModeStatusDisplay() {
-    $("#powerModeStatus").text(function() {
+    $("#powerSaveSwitch").attr("style", function(){
       if (thermostat.powerSaveStatus)
-        return "On"
+        return "color:green"
       else
-      return "Off"
-    })
+        return "color:red"
+    });
   }
 
   var select = document.forms[0].cities;
@@ -63,7 +63,7 @@ $( document ).ready(function() {
       dataType: "json",
       success: function(response) {
         $("#weatherTemp").text(function() {
-          return response.main.temp + " C";
+          return response.main.temp;
         });
       }
     });
