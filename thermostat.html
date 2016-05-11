@@ -7,7 +7,19 @@
 <body>
   <p>Temperature:<span id="temperature"></span></p>
   <p>Power mode status:<p id="powerModeStatus"/></p>
-  <p>Energy usage:<p id="energyUsage"/></p>
+  <p>Temperature Outside:<p id="weatherTemp"/></p>
+  <div>
+  <h4>City selection</h4>
+  <form>
+  <select name="cities" onChange="getWeather(this.value);">
+    <option value="2643743">London</option>
+    <option value="2673730">Stockholm</option>
+    <option value="7839805">Melbourne</option>
+    <option value="2649808">Exeter</option>
+    <option value="4736134">Texas City</option>
+  </select>
+  </form><br>
+  </div>
 
   <button id="increase">Increase Temperature</button>
   <br>

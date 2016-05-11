@@ -44,4 +44,29 @@ $( document ).ready(function() {
       $("body").attr("style", function(){
         return "background-color:" + thermostat.displayColour() + ";"
       });
-  });
+
+      // var cities = document.getElementById("cities"),
+      //   city = cities.options[cities.selectedIndex].value;
+
+      var select = document.forms[0].cities;
+      select.onchange = function(){
+        var value = select.options[select.selectedIndex].value;
+        getWeather(value)
+      }
+
+      function getWeather(city) {
+        var url = 'http://api.openweathermap.org/data/2.5/weather?id=' + city + '&APPID=0ea98111060a61f6a3408109332873c0&units=metric'; 
+        console.log(url);
+        $.ajax({
+        json: "callback",
+        url: url,
+        dataType: "json",
+        success: function(response) {
+          $("#weatherTemp").text(function() {
+            console.log(response.main.temp);
+            return response.main.temp + " C";
+          });
+        }
+        });
+      }
+});
