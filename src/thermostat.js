@@ -1,7 +1,10 @@
 function Thermostat () {
   this.STARTING_VALUE = 20
+  this.MINIMUM_VALUE = 10
   this.temperature = this.STARTING_VALUE
   this.maximumTemperature = 25
+  this.lowUsage = 18
+  this.midUsage = 25
 }
 
 Thermostat.prototype.value = function() {
@@ -17,13 +20,13 @@ Thermostat.prototype.increase = function(amount) {
 
 Thermostat.prototype.decrease = function(amount) {
   if(this.belowMinimum(amount))
-    throw new Error("Minimum temperature is 10")
+    throw new Error("Minimum temperature is " + this.MINIMUM_VALUE)
   else
     this.temperature -= amount
 }
 
 Thermostat.prototype.belowMinimum = function(amount) {
-  return ((this.temperature - amount) < 10)
+  return ((this.value() - amount) < this.MINIMUM_VALUE)
 }
 
 Thermostat.prototype.maxTemp = function() {
@@ -38,9 +41,18 @@ Thermostat.prototype.togglePowerSave = function(status) {
 }
 
 Thermostat.prototype.aboveMaximum = function(amount) {
-  return ((this.temperature + amount) > this.maxTemp())
+  return ((this.value() + amount) > this.maxTemp())
 }
 
 Thermostat.prototype.reset = function() {
-  return this.temperature = 20
+  return this.temperature = this.STARTING_VALUE
+}
+
+Thermostat.prototype.displayColour = function() {
+  if(this.value() < this.lowUsage)
+    return "green"
+  else if (this.value() < this.midUsage)
+    return "yellow"
+  else
+  return "red"
 }
