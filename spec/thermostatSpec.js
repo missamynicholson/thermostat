@@ -51,7 +51,7 @@ describe("Feature test:", function() {
   describe("reset button", function() {
     it("resets temperature to 20", function() {
       thermostat.reset()
-      expect(thermostat.value()).toEqual(this.STARTING_VALUE)
+      expect(thermostat.value()).toEqual(thermostat.STARTING_VALUE)
     })
   });
 
