@@ -5,7 +5,7 @@
 </head>
 
 <body>
-  <p>Temperature:<p id="temperature"/></p>
+  <p>Temperature:<span id="temperature"></span></p>
   <p>Power mode status:<p id="powerModeStatus"/></p>
   <p>Energy usage:<p id="energyUsage"/></p>
 
@@ -15,10 +15,12 @@
   <br>
   <button id="reset">Reset Temperature</button>
   <br>
-  <button id="powerSaveOn">Power Save On</button>
-  <br>
-  <button id="powerSaveOff">Power Save Off</button>
+  <button id="powerSaveSwitch">Power Save Switch</button>
+
 
   <script src="src/thermostat.js"></script>
+  <script src="jquery.js"></script>
+  <script src="thermostatJQuery.js"></script>
+
 </body>
 </html>
