@@ -4,30 +4,45 @@ $(document).ready(function() {
 
   $('#increase').click(function(event) {
     thermostat.up(1)
-      $('#currentTemperature').text(thermostat.temperature());
-      $('body').css({'background-color':thermostat.colour()});
+    updateTemperatureDisplay()
+    updateDisplayColour ()
   });
 
   $('#decrease').click(function(event) {
     thermostat.down(1)
-      $('#currentTemperature').text(thermostat.temperature());
-      $('body').css({'background-color':thermostat.colour()});
+    updateTemperatureDisplay()
+    updateDisplayColour ()
   });
 
   $('#reset').click(function(event) {
     thermostat.reset()
-      $('#currentTemperature').text(thermostat.temperature());
-      $('body').css({'background-color':thermostat.colour()});
+    updateTemperatureDisplay()
+    updateDisplayColour ()
   });
 
   $('#powerMode').click(function(event) {
     thermostat.switchPowerMode()
-    $('#powerModeStatus').text(thermostat.powerMode())
+    updatePowerModeDisplay ()
   });
 
-  $('#powerModeStatus').text(thermostat.powerMode());
+  $('select').change(function(event) {
+    this.value
+  })
 
-  $('#currentTemperature').text(thermostat.temperature());
 
-  $('body').css({'background-color':thermostat.colour()});
+  updateTemperatureDisplay()
+  updateDisplayColour ()
+  updatePowerModeDisplay ()
+
+  function updateTemperatureDisplay() {
+    $('#currentTemperature').text(thermostat.temperature());
+  }
+
+  function updateDisplayColour () {
+    $('body').css({'background-color':thermostat.colour()});
+  }
+
+  function updatePowerModeDisplay () {
+    $('#powerModeStatus').text(thermostat.powerMode());
+  }
 });
