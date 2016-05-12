@@ -12,7 +12,7 @@ var thermostat;
   });
 
   it('starts with power mode on', function() {
-    expect(thermostat.powerMode()).toBe(true)
+    expect(thermostat.powerMode()).toEqual("On")
   });
 
   it('I can switch power mode from on to off', function() {

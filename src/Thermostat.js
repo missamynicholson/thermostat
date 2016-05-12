@@ -12,7 +12,11 @@ function Thermostat() {
 }
 
   Thermostat.prototype.powerMode = function() {
-    return this._power_mode;
+    if (this._power_mode === true) {
+      return "On"
+    } else {
+      return "Off"
+    }
   };
 
   Thermostat.prototype.temperature = function() {
