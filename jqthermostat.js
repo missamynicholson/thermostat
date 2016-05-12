@@ -26,13 +26,18 @@ $(document).ready(function() {
   });
 
   $('select').change(function(event) {
-    this.value
+    getWeather(this.value)
   })
-
 
   updateTemperatureDisplay()
   updateDisplayColour ()
   updatePowerModeDisplay ()
+
+  function getWeather(city) {
+    var url = 'http://api.openweathermap.org/data/2.5/weather?id=' + city + '&APPID=0ea98111060a61f6a3408109332873c0&units=metric';  $.get(url,function(wheather) {
+      $(cityTemperature).text(wheather.main.temp)
+    });
+  }
 
   function updateTemperatureDisplay() {
     $('#currentTemperature').text(thermostat.temperature());
