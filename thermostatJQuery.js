@@ -25,6 +25,10 @@ $( document ).ready(function() {
       updatePowerModeStatusDisplay()
   });
 
+  $("select").change(function(event) {
+    getWeather(this.value)
+  });
+
   updateTemperatureDisplay()
   updatePowerModeStatusDisplay()
   updateDisplayColour ()
@@ -35,9 +39,7 @@ $( document ).ready(function() {
   }
 
   function updateDisplayColour () {
-    $("body").attr("style", function(){
-      return "background-color:" + thermostat.displayColour() + ";"
-    });
+    $("body").css({"background-color":thermostat.displayColour()});
   }
 
   function updatePowerModeStatusDisplay() {
@@ -49,23 +51,11 @@ $( document ).ready(function() {
     });
   }
 
-  var select = document.forms[0].cities;
-  select.onchange = function(){
-    var value = select.options[select.selectedIndex].value;
-    getWeather(value)
-  }
 
   function getWeather(city) {
     var url = 'http://api.openweathermap.org/data/2.5/weather?id=' + city + '&APPID=0ea98111060a61f6a3408109332873c0&units=metric';
-    $.ajax({
-      json: "callback",
-      url: url,
-      dataType: "json",
-      success: function(response) {
-        $("#weatherTemp").text(function() {
-          return response.main.temp;
-        });
-      }
+    $.get(url, function(response) {
+        $("#weatherTemp").text(response.main.temp);
     });
   }
 });
