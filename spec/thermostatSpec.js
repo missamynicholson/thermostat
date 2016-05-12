@@ -58,17 +58,17 @@ describe("Feature test:", function() {
   describe("display colour", function() {
     it("displays green if temperature is less than 18", function() {
       thermostat.decrease(3)
-      expect(thermostat.displayColour()).toEqual("green")
+      expect(thermostat.displayColour()).toEqual("#79d279")
     });
 
     it("displays yellow if temperature is less than 25", function() {
       thermostat.increase(4)
-      expect(thermostat.displayColour()).toEqual("yellow")
+      expect(thermostat.displayColour()).toEqual("#ffd480")
     });
 
     it("displays red if temperature is greater than or equal to 25", function() {
       thermostat.increase(5)
-      expect(thermostat.displayColour()).toEqual("red")
+      expect(thermostat.displayColour()).toEqual("#ff5c33")
     });
   });
 });

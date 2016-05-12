@@ -7,7 +7,7 @@ function Thermostat () {
   this.MAX_WITH_POWER_MODE_ON = 25
   this.MAX_WITH_POWER_MODE_OFF = 32
   this.maximumTemperature = this.MAX_WITH_POWER_MODE_ON
-  this.powerSaveStatus
+  this.powerSaveStatus = true;
 }
 
 Thermostat.prototype.value = function() {

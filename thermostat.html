@@ -10,40 +10,44 @@
 
 <body>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6">
-        <p style="color:white">Temperature Outside:<p><span id="weatherTemp"></span>&#x2103</p></p>
+  <div class="row">
+
+    <div class="col-md-4">
+      <p style="color:white">Temperature Outside:<p><span id="weatherTemp"></span>&#x2103</p></p>
+    </div>
+
+    <div class="col-md-4">
+      <div id="increase" style="cursor:">
+        <i  class="material-icons" style="font-size:100px; color:#FFFFFF">keyboard_arrow_up</i>
       </div>
-      <div class="col-md-6">
-        <p style="color:white">Power mode:</p><br>
-        <i id="powerSaveSwitch" class="material-icons">power</i>
+      <p>
+        <span id="temperature" style="font-size:100px; color:#FFFFFF"></span>
+        <i id="reset" class="material-icons vcenter" style="font-size:25px; color:#FFFFFF">refresh</i>
+      </p>
+      <div>
+        <i id="decrease" class="material-icons" style="font-size:100px; color:#FFFFFF">keyboard_arrow_down</i>
       </div>
     </div>
+
+    <div class="col-md-4">
+      <p style="color:white">Power mode:</p><br>
+      <i id="powerSaveSwitch" class="material-icons">power</i>
+    </div>
+
   </div>
 
-  <div class="row">
   <div align="center">
-  <form >
-  <select style="width:50%" class="form-control" name="cities" onChange="getWeather(this.value);">
-    <option value="2643743">London</option>
-    <option value="2673730">Stockholm</option>
-    <option value="7839805">Melbourne</option>
-    <option value="2649808">Exeter</option>
-    <option value="4736134">Texas City</option>
-  </select>
-  </form><br>
-</div>
+    <form>
+      <select style="width:50%" class="form-control" name="cities" onChange="getWeather(this.value);">
+        <option value="2643743">I am in London</option>
+        <option value="2673730">I am in Stockholm</option>
+        <option value="7839805">I am in Melbourne</option>
+        <option value="2649808">I am in Exeter</option>
+        <option value="4736134">I am in Texas City</option>
+      </select>
+    </form>
   </div>
 
-
-  <i id="increase" class="material-icons" style="font-size:70px; color:#FFFFFF">keyboard_arrow_up</i>
-  <br>
-  <p><span id="temperature" style="font-size:100px; color:#FFFFFF"></span><i id="reset" class="material-icons vcenter" style="font-size:40px; color:#FFFFFF">refresh</i></p>
-  <br>
-  <i id="decrease" class="material-icons" style="font-size:70px; color:#FFFFFF">keyboard_arrow_down</i>
-
-  <br>
 
   <script src="src/thermostat.js"></script>
   <script src="jquery.js"></script>
