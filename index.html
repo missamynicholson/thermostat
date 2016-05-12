@@ -2,24 +2,26 @@
 <html>
 <head>
   <meta charset="UTF-8">
-
+<link to Twitter bootsraop>
   <title>Thermostat</title>
 </head>
 
 <body>
 
- <form action='/users' method='post' class="user-form">
-    <input type='submit' value='Decrease'>
-    <label for='change_temperature' class="emphasise-black">
-       <input name='name' type='text' required>
-    </label>
-    ºC<input type='submit' value='Increase'>
-    <br>
-    <br>
-    <input type='submit' value='Reset'>
-    <input type='submit' value='Powermode'>
+  <span id ="powerModeStatus">power mode status</span>
+  <br>
+  <span id ="currentTemperature">currentTemp</span>
 
-  </form>
+  <button id="increase">Increase</button>
+  <br>
+  <button id="decrease">Decrease</button>
+  <br>
+  <button id="reset">Reset</button>
+  <br>
+  <button id="powerMode">Power mode</button>
+
+  <input type="text" placeholder="temperature">
+
   <script src="src/Thermostat.js"></script>
 </body>
 
