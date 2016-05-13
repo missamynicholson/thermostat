@@ -1,71 +1,75 @@
-function Thermostat (temp) {
-  this.STARTING_VALUE = 20
+function Thermostat (temp = 20) {
+  this.RESET_VALUE = 20
   this.MINIMUM_VALUE = 10
   this.temperature = +temp
-  this.lowUsage = 18
-  this.midUsage = 25
+  this.LOW_USAGE_THRESHOLD = 18
+  this.MID_USAGE_THRESHOLD = 25
   this.MAX_WITH_POWER_MODE_ON = 25
   this.MAX_WITH_POWER_MODE_OFF = 32
   this.maximumTemperature = this.MAX_WITH_POWER_MODE_ON
   this.powerSaveStatus = true;
+  this.GREEN_ID = "#79d279"
+  this.YELLOW_ID = "#ffd480"
+  this.RED_ID = "#ff5c33"
 }
 
-Thermostat.prototype.value = function() {
+Thermostat.prototype.currentTemperature = function() {
   return this.temperature;
-}
-
-Thermostat.prototype.increase = function(amount) {
-  if(this.aboveMaximum(amount))
-    throw new Error("Max temp is " + this.maxTemp())
-  else
-    this.temperature += amount
-}
-
-Thermostat.prototype.decrease = function(amount) {
-  if(this.belowMinimum(amount))
-    throw new Error("Minimum temperature is " + this.MINIMUM_VALUE)
-  else
-    this.temperature -= amount
-}
-
-Thermostat.prototype.belowMinimum = function(amount) {
-  return ((this.value() - amount) < this.MINIMUM_VALUE)
 }
 
 Thermostat.prototype.maxTemp = function() {
   return this.maximumTemperature
 }
 
-Thermostat.prototype.togglePowerSave = function(status) {
+Thermostat.prototype.powerSaveStatus = function() {
+  return this.powerSaveStatus
+}
+
+Thermostat.prototype.displayColour = function() {
+  if(this.currentTemperature() < this.LOW_USAGE_THRESHOLD)
+    return this.GREEN_ID
+  else if (this.currentTemperature() < this.MID_USAGE_THRESHOLD)
+    return this.YELLOW_ID
+  else
+    return this.RED_ID
+}
+
+Thermostat.prototype.increase = function(amount) {
+  if(this.isaboveMaximum(amount))
+    throw new Error("Max temp is " + this.maxTemp())
+  else
+    this.temperature += amount
+}
+
+Thermostat.prototype.decrease = function(amount) {
+  if(this.isbelowMinimum(amount))
+    throw new Error("Minimum temperature is " + this.MINIMUM_VALUE)
+  else
+    this.temperature -= amount
+}
+
+Thermostat.prototype.reset = function() {
+  return this.temperature = this.RESET_VALUE
+}
+
+Thermostat.prototype.powerSaveSwitch = function() {
+  this.powerSaveStatus = !this.powerSaveStatus
+  this.adjustMaxTemp(this.powerSaveStatus)
+}
+
+Thermostat.prototype.adjustMaxTemp = function(status) {
   if (status)
     this.maximumTemperature = this.MAX_WITH_POWER_MODE_ON
   else
     this.maximumTemperature = this.MAX_WITH_POWER_MODE_OFF
 }
 
-Thermostat.prototype.powerSaveSwitch = function() {
-  this.powerSaveStatus = !this.powerSaveStatus
-  this.togglePowerSave(this.powerSaveStatus)
-}
 
-Thermostat.prototype.powerSaveStatus = function() {
-  return this.powerSaveStatus
-}
-
-Thermostat.prototype.aboveMaximum = function(amount) {
-  return ((this.value() + amount) > this.maxTemp())
+Thermostat.prototype.isaboveMaximum = function(amount) {
+  return ((this.currentTemperature() + amount) > this.maxTemp())
 }
 
 
-Thermostat.prototype.reset = function() {
-  return this.temperature = this.STARTING_VALUE
-}
-
-Thermostat.prototype.displayColour = function() {
-  if(this.value() < this.lowUsage)
-    return "#79d279"
-  else if (this.value() < this.midUsage)
-    return "#ffd480"
-  else
-  return "#ff5c33"
+Thermostat.prototype.isbelowMinimum = function(amount) {
+  return ((this.currentTemperature() - amount) < this.MINIMUM_VALUE)
 }

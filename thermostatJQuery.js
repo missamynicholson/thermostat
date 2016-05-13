@@ -30,7 +30,7 @@ $( document ).ready(function() {
   });
 
   function updateTemperatureDisplay() {
-    $("#temperature").text(thermostat.value());
+    $("#temperature").text(thermostat.currentTemperature());
   }
 
   function updateDisplayColour () {
@@ -45,7 +45,6 @@ $( document ).ready(function() {
         return "color:red"
     });
   }
-
 
   function getWeather(city) {
     var siteUrl = "http://api.openweathermap.org/data/2.5/weather?id="
@@ -64,21 +63,20 @@ $( document ).ready(function() {
         dataType: "html",
         success: function(data){
           thermostat = new Thermostat(data);
-            combineFunctions()
-            getWeather("2643743")
+          combineFunctions()
+          getWeather("2643743")
         },
-        error: function(data){
-          thermostat = new Thermostat(20);
+        error: function(){
+          thermostat = new Thermostat();
           combineFunctions()
           getWeather("2643743")
         }
-    }).done(function(data){
-
     });
   }
 
   function sendTempToServer() {
-    var url = 'http://localhost:4567/temperature?temp=' + thermostat.value();
+    var urlString = "http://localhost:4567/temperature?temp="
+    var url = urlString + thermostat.currentTemperature();
     $.post(url);
   }
 
