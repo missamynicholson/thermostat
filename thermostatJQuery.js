@@ -1,23 +1,26 @@
 $( document ).ready(function() {
 
-  thermostat = new Thermostat();
+  var thermostat;
 
   $( "#increase" ).click(function( event ) {
       thermostat.increase(1);
       updateTemperatureDisplay()
       updateDisplayColour ()
+      sendTempToServer()
   });
 
   $( "#decrease" ).click(function( event ) {
       thermostat.decrease(1);
       updateTemperatureDisplay()
       updateDisplayColour ()
+      sendTempToServer()
   });
 
   $( "#reset" ).click(function( event ) {
       thermostat.reset();
       updateTemperatureDisplay()
       updateDisplayColour ()
+      sendTempToServer()
   });
 
   $( "#powerSaveSwitch" ).click(function( event ) {
@@ -28,11 +31,6 @@ $( document ).ready(function() {
   $("select").change(function(event) {
     getWeather(this.value)
   });
-
-  updateTemperatureDisplay()
-  updatePowerModeStatusDisplay()
-  updateDisplayColour ()
-  getWeather("2643743")
 
   function updateTemperatureDisplay() {
     $("#temperature").text(thermostat.value());
@@ -58,4 +56,37 @@ $( document ).ready(function() {
         $("#weatherTemp").text(response.main.temp);
     });
   }
+
+  function getTempFromServer() {
+    var url = 'http://localhost:4567/temperature';
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "html",
+        success: function(data){
+          thermostat = new Thermostat(data);
+            updateTemperatureDisplay()
+            updatePowerModeStatusDisplay()
+            updateDisplayColour ()
+            getWeather("2643743")
+        },
+        error: function(data){
+          thermostat = new Thermostat(20);
+          updateTemperatureDisplay()
+          updatePowerModeStatusDisplay()
+          updateDisplayColour ()
+          getWeather("2643743")
+        }
+    }).done(function(data){
+
+    });
+  }
+
+  function sendTempToServer() {
+    var url = 'http://localhost:4567/temperature?temp=' + thermostat.value();
+    $.post(url);
+  }
+
+  getTempFromServer()
+
 });

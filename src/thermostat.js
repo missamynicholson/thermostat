@@ -1,7 +1,7 @@
-function Thermostat () {
+function Thermostat (temp) {
   this.STARTING_VALUE = 20
   this.MINIMUM_VALUE = 10
-  this.temperature = this.STARTING_VALUE
+  this.temperature = +temp
   this.lowUsage = 18
   this.midUsage = 25
   this.MAX_WITH_POWER_MODE_ON = 25

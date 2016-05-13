@@ -10,7 +10,7 @@ describe("Feature test:", function() {
       expect(thermostat.value()).toEqual(thermostat.STARTING_VALUE)
     });
   });
-
+s
   describe("changing temperature", function() {
     it("can increase the temperature with the up button", function() {
       thermostat.increase(3)
@@ -36,7 +36,7 @@ describe("Feature test:", function() {
     it("throws an error when temperature goes above 25 degrees", function() {
       thermostat.togglePowerSave(true)
       thermostat.increase(5)
-        expect(function() {thermostat.increase(1)}).toThrowError("Max temp is 25")
+        expect(function() {thermostat.increase(1)}).toThrowError("Max temp is " + thermostat.MAX_WITH_POWER_MODE_ON)
     });
   });
 
@@ -44,7 +44,7 @@ describe("Feature test:", function() {
     it("throws an error when temperature goes above 32 degrees", function() {
         thermostat.togglePowerSave(false)
         thermostat.increase(12)
-        expect(function() {thermostat.increase(1)}).toThrowError("Max temp is 32")
+        expect(function() {thermostat.increase(1)}).toThrowError("Max temp is " + thermostat.MAX_WITH_POWER_MODE_OFF)
     });
   });
 
