@@ -4,22 +4,19 @@ $( document ).ready(function() {
 
   $( "#increase" ).click(function( event ) {
       thermostat.increase(1);
-      updateTemperatureDisplay()
-      updateDisplayColour ()
+      combineFunctions()
       sendTempToServer()
   });
 
   $( "#decrease" ).click(function( event ) {
       thermostat.decrease(1);
-      updateTemperatureDisplay()
-      updateDisplayColour ()
+      combineFunctions()
       sendTempToServer()
   });
 
   $( "#reset" ).click(function( event ) {
       thermostat.reset();
-      updateTemperatureDisplay()
-      updateDisplayColour ()
+      combineFunctions()
       sendTempToServer()
   });
 
@@ -51,7 +48,9 @@ $( document ).ready(function() {
 
 
   function getWeather(city) {
-    var url = 'http://api.openweathermap.org/data/2.5/weather?id=' + city + '&APPID=0ea98111060a61f6a3408109332873c0&units=metric';
+    var siteUrl = "http://api.openweathermap.org/data/2.5/weather?id="
+    var appId = "&APPID=0ea98111060a61f6a3408109332873c0&units=metric"
+    var url = siteUrl + city + appId;
     $.get(url, function(response) {
         $("#weatherTemp").text(response.main.temp);
     });
@@ -65,16 +64,12 @@ $( document ).ready(function() {
         dataType: "html",
         success: function(data){
           thermostat = new Thermostat(data);
-            updateTemperatureDisplay()
-            updatePowerModeStatusDisplay()
-            updateDisplayColour ()
+            combineFunctions()
             getWeather("2643743")
         },
         error: function(data){
           thermostat = new Thermostat(20);
-          updateTemperatureDisplay()
-          updatePowerModeStatusDisplay()
-          updateDisplayColour ()
+          combineFunctions()
           getWeather("2643743")
         }
     }).done(function(data){
@@ -85,6 +80,12 @@ $( document ).ready(function() {
   function sendTempToServer() {
     var url = 'http://localhost:4567/temperature?temp=' + thermostat.value();
     $.post(url);
+  }
+
+  function combineFunctions() {
+    updateTemperatureDisplay()
+    updatePowerModeStatusDisplay()
+    updateDisplayColour ()
   }
 
   getTempFromServer()
