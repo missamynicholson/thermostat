@@ -27,6 +27,7 @@ $( document ).ready(function() {
 
   $("select").change(function(event) {
     getWeather(this.value)
+    sendCityToServer()
   });
 
   function updateTemperatureDisplay() {
@@ -80,6 +81,29 @@ $( document ).ready(function() {
     $.post(url);
   }
 
+  function sendCityToServer() {
+    var urlString = "http://localhost:4567/city?city="
+    var url = urlString + $("select").val();
+    $.post(url);
+  }
+
+  function getCityFromServer() {
+    var url = 'http://localhost:4567/city';
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "html",
+        success: function(data){
+          $("select").val(data);
+          getWeather(data)
+        },
+        error: function(){
+          $("select").val("2643743");
+          getWeather("2643743")
+        }
+    });
+  }
+
   function combineFunctions() {
     updateTemperatureDisplay()
     updatePowerModeStatusDisplay()
@@ -87,5 +111,6 @@ $( document ).ready(function() {
   }
 
   getTempFromServer()
+  getCityFromServer()
 
 });
